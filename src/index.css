@@ -1,0 +1,362 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────
+   Base
+───────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #0a0a0a;
+    color: #e5e2e1;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    background: #00f2ff33;
+    color: #00f2ff;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Typography utilities
+───────────────────────────────────────────────────────────── */
+@layer utilities {
+  .terminal-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Logo glow
+───────────────────────────────────────────────────────────── */
+.logo-glow {
+  text-shadow:
+    0 0 12px #00f2ff55,
+    0 0 28px #00f2ff22;
+  transition: text-shadow 0.35s ease;
+}
+
+.logo-glow:hover {
+  text-shadow:
+    0 0 16px #00f2ffaa,
+    0 0 40px #00f2ff44;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Command Hub — sticky header
+───────────────────────────────────────────────────────────── */
+.command-hub {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  height: 4.5rem;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(58, 73, 75, 0.35);
+  will-change: transform;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Command links — nav items
+───────────────────────────────────────────────────────────── */
+.command-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 0.25rem 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #849495;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  /* Reserve space for > prefix to prevent CLS */
+  padding-left: 1em;
+}
+
+/* The > prefix — always in layout, invisible by default */
+.command-link::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: transparent;
+  transition: color 0.2s ease;
+}
+
+/* Hover flicker — CRT terminal style */
+.command-link:hover {
+  color: #e5e2e1;
+  animation: nav-flicker 0.08s steps(2) 1;
+}
+
+/* Active state */
+.command-link.is-active {
+  color: #00f2ff;
+}
+
+.command-link.is-active::before {
+  color: #00f2ff;
+}
+
+/* CRT flicker keyframes */
+@keyframes nav-flicker {
+  0%   { opacity: 0.7; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.85; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   CTA button glow
+───────────────────────────────────────────────────────────── */
+.glow-cyan {
+  box-shadow:
+    0 0 14px #00f2ff44,
+    0 2px 24px #00f2ff22;
+  transition: box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.glow-cyan:hover {
+  box-shadow:
+    0 0 22px #00f2ff77,
+    0 4px 40px #00f2ff33;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Mobile fullscreen system menu
+───────────────────────────────────────────────────────────── */
+.system-menu-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(10, 10, 10, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow-y: auto;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Scroll progress rail — 2px right-edge bar
+───────────────────────────────────────────────────────────── */
+.progress-rail {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100vh;
+  background: rgba(58, 73, 75, 0.3);
+  z-index: 60;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.progress-rail__fill {
+  width: 100%;
+  background: #00f2ff;
+  box-shadow: 0 0 8px #00f2ff88;
+  transition: height 0.1s linear;
+  will-change: height;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Section shell
+───────────────────────────────────────────────────────────── */
+.section-shell {
+  position: relative;
+  border-bottom: 1px solid rgba(58, 73, 75, 0.2);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Schematic background pattern
+───────────────────────────────────────────────────────────── */
+.schematic-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Scanline overlay — subtle CRT effect
+───────────────────────────────────────────────────────────── */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.06) 3px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Terminal window chrome
+───────────────────────────────────────────────────────────── */
+.terminal-chrome {
+  border: 1px solid rgba(58, 73, 75, 0.4);
+  background: #0a0a0a;
+}
+
+.terminal-chrome__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(58, 73, 75, 0.4);
+  background: #111111;
+}
+
+.terminal-chrome__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Vertical timeline connector (SovereignPath)
+───────────────────────────────────────────────────────────── */
+.timeline-connector {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent, #3a494b 20%, #3a494b 80%, transparent);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Stage card accent
+───────────────────────────────────────────────────────────── */
+.stage-active-glow {
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 242, 255, 0.2),
+    0 0 32px rgba(0, 242, 255, 0.06);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Cursor blink
+───────────────────────────────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1.1s step-end infinite;
+}
+
+.terminal-key {
+  color: #00f2ff;
+  font-weight: 700;
+}
+
+.terminal-value {
+  color: #e5e5e5;
+}
+
+.terminal-type-line {
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+}
+
+.terminal-type-line.is-visible {
+  animation: terminal-type-reveal 0.32s steps(18, end) both;
+}
+
+@keyframes terminal-type-reveal {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.signal-node-link {
+  transition: color 0.2s ease, filter 0.2s ease;
+}
+
+.signal-node-link:hover {
+  color: #e5e2e1;
+  filter: brightness(1.25);
+  animation: nav-flicker 0.08s steps(2) 1;
+}
+
+.global-scanlines {
+  position: relative;
+  isolation: isolate;
+}
+
+.global-scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(255, 255, 255, 0.015) 3px,
+    rgba(255, 255, 255, 0.015) 4px
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 65;
+}
+
+.hero-typewriter {
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  animation: terminal-type-reveal 0.75s steps(28, end) 120ms both;
+}
+
+.sovereign-line {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 242, 255, 0.28) 18%,
+    rgba(0, 242, 255, 0.55) 50%,
+    rgba(0, 242, 255, 0.28) 82%,
+    transparent
+  );
+  box-shadow: 0 0 10px rgba(0, 242, 255, 0.45);
+  animation: pulse-cyan 1.9s ease-in-out infinite;
+}
+
+.pulse-cyan {
+  animation: pulse-cyan 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-cyan {
+  0%,
+  100% {
+    filter: brightness(1);
+    text-shadow: 0 0 0 transparent;
+  }
+  50% {
+    filter: brightness(1.35);
+    text-shadow: 0 0 14px rgba(0, 242, 255, 0.5);
+  }
+}
