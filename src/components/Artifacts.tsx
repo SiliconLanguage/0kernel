@@ -149,9 +149,12 @@ export default function Artifacts() {
           })}
 
           {/* Foundry Card */}
-          <div className="foundry-card group flex flex-col bg-[#0e0e0e] p-6 cursor-pointer">
+          <div className="foundry-card group relative flex flex-col bg-[#0e0e0e] p-6 cursor-pointer overflow-hidden">
+            {/* Scanline overlay */}
+            <div className="foundry-scanline absolute inset-0 pointer-events-none" />
+
             {/* Header */}
-            <div className="mb-4 flex items-start justify-between gap-4">
+            <div className="relative mb-4 flex items-start justify-between gap-4 z-10">
               <span className="font-mono text-[0.65rem] uppercase tracking-widest text-[#849495]/50">
                 FOUNDRY-001
               </span>
@@ -160,37 +163,43 @@ export default function Artifacts() {
               </span>
             </div>
 
-            {/* Icon + Title */}
-            <div className="mb-3 flex items-start gap-3">
+            {/* Icon + Title + Subtitle */}
+            <div className="relative z-10 mb-1 flex items-start gap-3">
               <svg
                 className="mt-0.5 shrink-0 text-[#00f2ff]/60 group-hover:text-[#00f2ff] transition-colors"
-                width="18" height="18" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-                aria-hidden="true"
+                width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="1.2" aria-hidden="true"
               >
-                <circle cx="6" cy="6" r="2" />
-                <circle cx="18" cy="6" r="2" />
-                <circle cx="12" cy="18" r="2" />
-                <line x1="6" y1="8" x2="6" y2="14" />
-                <line x1="6" y1="14" x2="12" y2="16" />
-                <line x1="18" y1="8" x2="18" y2="14" />
-                <line x1="18" y1="14" x2="12" y2="16" />
-                <line x1="6" y1="6" x2="18" y2="6" />
+                {/* Silicon Lattice */}
+                <rect x="4" y="4" width="16" height="16" />
+                <line x1="12" y1="4" x2="12" y2="20" />
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <circle cx="8" cy="8" r="1.2" />
+                <circle cx="16" cy="8" r="1.2" />
+                <circle cx="8" cy="16" r="1.2" />
+                <circle cx="16" cy="16" r="1.2" />
+                <circle cx="12" cy="12" r="1.5" />
               </svg>
               <h3 className="text-base font-light leading-snug text-[#e5e2e1] group-hover:text-[#00f2ff] transition-colors">
                 The SiliconLanguage Foundry
               </h3>
             </div>
 
+            {/* Subtitle */}
+            <p className="relative z-10 mb-4 text-[0.85rem] font-semibold text-[#00f2ff] leading-snug">
+              Engineering the Monadic Paradigm.
+            </p>
+
             {/* Description */}
-            <p className="mb-5 flex-1 text-sm font-light leading-relaxed text-[#849495]">
-              Simulating the Sovereign Data Plane. Active repositories, open builds, and engineering
-              artifacts from the kernel project in-progress.
+            <p className="relative z-10 mb-5 flex-1 text-sm font-light leading-relaxed text-[#849495]">
+              Bridging the data plane from emulation to the physical substrate through active repositories,
+              open builds, and model/software siliconization. This is where the post-Von Neumann theory
+              and code become hardened silicon.
             </p>
 
             {/* Tags */}
-            <div className="mb-4 flex flex-wrap gap-1.5">
-              {(['SOURCE_CODE', 'OPEN_BUILD', 'ACTIVE'] as const).map((tag) => (
+            <div className="relative z-10 mb-4 flex flex-wrap gap-1.5">
+              {(['SILICON_SYNTHESIS', 'OPEN_BUILD', 'ACTIVE'] as const).map((tag) => (
                 <span
                   key={tag}
                   className="font-mono text-[0.58rem] uppercase tracking-widest px-1.5 py-0.5 border border-[#3a494b]/25 text-[#849495]/50"
@@ -205,7 +214,7 @@ export default function Artifacts() {
               href="https://github.com/SiliconLanguage"
               target="_blank"
               rel="noopener noreferrer"
-              className="artifact-link"
+              className="artifact-link relative z-10"
             >
               [ ACCESS_SOURCE_CODE ]
             </a>
