@@ -7,6 +7,9 @@ const ARTIFACTS = [
       'A doctrine-level brief on preserving compatibility and auditability while achieving near bare-metal execution paths across heterogeneous systems.',
     tags: ['INTERCEPTION', 'COMPATIBILITY', 'INFRASTRUCTURE'],
     status: 'AVAILABLE',
+    pdf: '/research/Artifact_Interception_Integrity-Double-Trampoline.pdf',
+    linkLabel: '[ VIEW_TECHNICAL_BRIEF ]',
+    restricted: true,
   },
   {
     id: 'brief-002',
@@ -16,6 +19,9 @@ const ARTIFACTS = [
       'Explores direct accelerator-memory pathways and fabric-first orchestration that minimize host CPU involvement for deterministic throughput.',
     tags: ['MONADIC', 'GPUDIRECT', 'LIBFABRIC'],
     status: 'AVAILABLE',
+    pdf: '/research/Monadic_Data_Plane_Architecture_GPUDirect_Update.pdf',
+    linkLabel: '[ OPEN_ARCH_SPEC ]',
+    restricted: false,
   },
   {
     id: 'brief-003',
@@ -25,6 +31,9 @@ const ARTIFACTS = [
       'Maps compiler-enforced co-design patterns that align model siliconization with infrastructure offloading into a unified execution strategy.',
     tags: ['COMPILATION', 'LLM_SILICONIZATION', 'OFFLOADING'],
     status: 'AVAILABLE',
+    pdf: '/research/domain-specific-compilation.pdf',
+    linkLabel: '[ READ_RESEARCH_PAPER ]',
+    restricted: false,
   },
 ] as const;
 
@@ -63,11 +72,11 @@ export default function Artifacts() {
             </p>
           </div>
           <span className="font-mono text-[0.68rem] uppercase tracking-widest text-[#849495]/40">
-            {ARTIFACTS.length} RECORDS FOUND
+            {ARTIFACTS.length + 1} RECORDS FOUND
           </span>
         </div>
 
-        <div className="grid gap-px bg-[#3a494b]/10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-px bg-[#3a494b]/10 sm:grid-cols-2">
           {ARTIFACTS.map((artifact) => {
             const badge = STATUS_BADGE[artifact.status] ?? STATUS_BADGE['CLASSIFIED'];
             const isAvailable = artifact.status === 'AVAILABLE';
@@ -119,14 +128,88 @@ export default function Artifacts() {
 
                 {/* Action */}
                 {isAvailable && (
-                  <div className="flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-widest text-[#849495] group-hover:text-[#00f2ff] transition-colors">
-                    <span className="material-symbols-outlined text-sm leading-none">download</span>
-                    REQUEST_ACCESS
+                  <div className="flex flex-col gap-1.5">
+                    <a
+                      href={artifact.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="artifact-link"
+                    >
+                      {artifact.linkLabel}
+                    </a>
+                    {artifact.restricted && (
+                      <span className="font-mono text-[0.56rem] tracking-wide text-[#849495]/40 leading-snug">
+                        (RESTRICTED_FULL_DECK_AVAILABLE_ON_REQUEST)
+                      </span>
+                    )}
                   </div>
                 )}
               </div>
             );
           })}
+
+          {/* Foundry Card */}
+          <div className="foundry-card group flex flex-col bg-[#0e0e0e] p-6 cursor-pointer">
+            {/* Header */}
+            <div className="mb-4 flex items-start justify-between gap-4">
+              <span className="font-mono text-[0.65rem] uppercase tracking-widest text-[#849495]/50">
+                FOUNDRY-001
+              </span>
+              <span className="shrink-0 font-mono text-[0.6rem] uppercase tracking-widest px-2 py-0.5 bg-[#00f2ff]/10 text-[#00f2ff]">
+                LIVE
+              </span>
+            </div>
+
+            {/* Icon + Title */}
+            <div className="mb-3 flex items-start gap-3">
+              <svg
+                className="mt-0.5 shrink-0 text-[#00f2ff]/60 group-hover:text-[#00f2ff] transition-colors"
+                width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="6" cy="6" r="2" />
+                <circle cx="18" cy="6" r="2" />
+                <circle cx="12" cy="18" r="2" />
+                <line x1="6" y1="8" x2="6" y2="14" />
+                <line x1="6" y1="14" x2="12" y2="16" />
+                <line x1="18" y1="8" x2="18" y2="14" />
+                <line x1="18" y1="14" x2="12" y2="16" />
+                <line x1="6" y1="6" x2="18" y2="6" />
+              </svg>
+              <h3 className="text-base font-light leading-snug text-[#e5e2e1] group-hover:text-[#00f2ff] transition-colors">
+                The SiliconLanguage Foundry
+              </h3>
+            </div>
+
+            {/* Description */}
+            <p className="mb-5 flex-1 text-sm font-light leading-relaxed text-[#849495]">
+              Simulating the Sovereign Data Plane. Active repositories, open builds, and engineering
+              artifacts from the kernel project in-progress.
+            </p>
+
+            {/* Tags */}
+            <div className="mb-4 flex flex-wrap gap-1.5">
+              {(['SOURCE_CODE', 'OPEN_BUILD', 'ACTIVE'] as const).map((tag) => (
+                <span
+                  key={tag}
+                  className="font-mono text-[0.58rem] uppercase tracking-widest px-1.5 py-0.5 border border-[#3a494b]/25 text-[#849495]/50"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* Action */}
+            <a
+              href="https://github.com/SiliconLanguage"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="artifact-link"
+            >
+              [ ACCESS_SOURCE_CODE ]
+            </a>
+          </div>
         </div>
 
         {/* Footer */}
