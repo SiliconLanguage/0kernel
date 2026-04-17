@@ -3,3 +3,4 @@ dist/
 fetch-stitch.mjs
 .vscode/
 stitch/
+*:Zone.Identifier
