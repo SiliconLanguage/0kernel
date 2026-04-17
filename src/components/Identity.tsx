@@ -77,7 +77,7 @@ export default function Identity() {
                 <p className="mt-1 terminal-value text-sm leading-relaxed break-words">
                   Bypassing the kernel and bridging the Cloud to Edge Pervasive Compute Fabric for
                   a post-Von Neumann event horizon. Focused on hardware-software co-design, Infra
-                  optimization for AI/HPC workloads, and bare-metal performance for unmodified
+                  optimization for AI, HPC workloads, and bare-metal performance for unmodified
                   workloads.
                 </p>
               </div>
