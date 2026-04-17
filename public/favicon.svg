@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="0kernel icon">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="#111111" />
+      <stop offset="100%" stop-color="#0A0A0A" />
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="1.2" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="64" height="64" rx="10" fill="url(#bg)" />
+  <rect x="1.5" y="1.5" width="61" height="61" rx="8.5" fill="none" stroke="#1F2A2C" stroke-width="1" />
+
+  <circle cx="32" cy="32" r="16" fill="none" stroke="#00F2FF" stroke-width="2" filter="url(#glow)" />
+  <circle cx="32" cy="32" r="3.6" fill="#00F2FF" filter="url(#glow)" />
+
+  <path d="M32 10V20M54 32H44M32 54V44M10 32H20" stroke="#00F2FF" stroke-width="1.8" stroke-linecap="round" opacity="0.95" />
+
+  <path d="M22 22L42 42M42 22L22 42" stroke="#2B3F42" stroke-width="1" opacity="0.6" />
+
+  <text x="32" y="59" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7.2" letter-spacing="0.6" fill="#8AA1A6">0K</text>
+</svg>
