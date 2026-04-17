@@ -12,6 +12,10 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
+    if (url.pathname === '/favicon.ico') {
+      return Response.redirect(new URL('/favicon.svg', url), 302);
+    }
+
     // Always resolve favicon even if ASSETS binding is temporarily unavailable.
     if (url.pathname === '/favicon.svg' && !env.ASSETS) {
       return new Response(FALLBACK_FAVICON_SVG, {

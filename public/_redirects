@@ -1,4 +1,1 @@
-/favicon.svg /favicon.svg 200
-/favicon.ico /favicon.ico 200
 /assets/* /assets/:splat 200
-/* /index.html 200
